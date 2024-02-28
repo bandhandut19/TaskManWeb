@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-purple-200 lg:px-10 px-3">
+        <div className="navbar bg-purple-200 mt-5 lg:px-10 px-3">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -28,7 +28,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/register">Register Now</Link>
+                <Link to="/register" className="lg:text-xl border-2 border-purple-700 px-3">Register</Link>
             </div>
         </div>
     );
