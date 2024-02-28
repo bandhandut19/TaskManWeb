@@ -1,10 +1,18 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext ,auth} from "../Providers/AuthProvider";
+import { signOut } from "firebase/auth";
 
 // theme color: 
 // primary: bg-purple-200
 // login/register: bg-purple-700 , text-yellow-300
 
 const Navbar = () => {
+    const {userInfo} = useContext(AuthContext)
+    const {user}= userInfo
+    const handleLogout = ()=>{
+        signOut(auth)
+    }
     return (
         <div className="navbar bg-purple-200 mt-5 lg:px-10 px-3">
             <div className="navbar-start">
@@ -28,7 +36,10 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/register" className="lg:text-xl border-2 border-purple-700 px-3">Register</Link>
+                {
+                    user?  <Link to="/" onClick={handleLogout} className="lg:text-xl border-2 border-purple-700 px-3">LogOut</Link> :  <Link to="/login" className="lg:text-xl border-2 border-purple-700 px-3">Login</Link>
+                }
+                
             </div>
         </div>
     );

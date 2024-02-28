@@ -1,17 +1,39 @@
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
+import { getAuth } from "firebase/auth";
+import app from '../../../firebase.config';
+
+export const auth = getAuth(app) 
+
 
 const Register = () => {
+  const {userInfo} = useContext(AuthContext)
+  const  {createUser} = userInfo
+  const navigate = useNavigate()
+  const [error,setError] = useState()
+
 
   const handleRegister=(e)=>{
     e.preventDefault()
     const form = e.target
-    const name = form.name.value
+    // const name = form.name.value
     const email = form.email.value
     const password = form.password.value
+    
+    createUser(email,password)
+    .then(res =>{
+      if(res){
+        navigate('/login')
+      }
+    })
+    .catch(error =>{
+      setError(error.message)
+    })
+    
+    console.log(error) // will use toast later
 
-    const userInfos = {
-      name,email,password
-    }
-    console.log(userInfos)
+    form.reset()
   }
 
 
@@ -48,6 +70,10 @@ const Register = () => {
 
             <div className="form-control mt-6">
               <button className="btn btn-primary bg-purple-700 text-yellow-300 hover:bg-purple-700">Register Now</button>
+              <div className="text-center">
+
+              <h1 className="py-2">Already have an account ? <br /> <Link to='/login' className="bg-purple-700 px-2 py-1 text-white">Login Now!</Link></h1>
+              </div>
             </div>
 
           </form>
