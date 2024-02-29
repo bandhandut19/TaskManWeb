@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext ,auth} from "../Providers/AuthProvider";
 import { signOut } from "firebase/auth";
 
@@ -30,9 +30,9 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li className="px-6 cursor-pointer">Task List</li>
-                    <li className="px-6 cursor-pointer">Create Task</li>
-                    <li className="px-6 cursor-pointer">Dashboard</li>
+                    <li className="px-6 cursor-pointer"><NavLink to='/tasklist'>Task List</NavLink></li>
+                    <li className="px-6 cursor-pointer"><NavLink to='/createtask'>Create Task</NavLink></li>
+                    <li className="px-6 cursor-pointer"><NavLink to='/'>Dashboard</NavLink></li>
                 </ul>
             </div>
             <div className="navbar-end">
